@@ -14,9 +14,9 @@ With CSRF **login** attacks, of course, the user isn't logged into the site alre
 
 ## The problem with Persona ##
 
-The problem with Persona arises when the user is not yet logged in, and has loaded pages from the RP's site in two separate tabs. The pages contain the same CSRF token, derived from the initial session ID. Then the user logs in from one tab, the website generates a new session ID, and thus a new CSRF token. But the other tab still has the old page loaded, containing the old, now invalid, token.
+The problem with Persona arises when the user is not yet logged in, and has loaded pages from the RP's site in two separate tabs, A and B. The pages contain the same CSRF token, derived from the initial session ID. Then the user logs in from tab A, the website generates a new session ID, and thus a new CSRF token. But tab B still has the old page loaded, containing the old, now invalid, token.
 
-Under normal circumstances this would not usually matter: as soon the other tab reloads the page, or the user navigates to a new page, then the embedded CSRF token is updated. But when Persona has generated an assertion in response to a call to `navigator.id.request()`, Persona calls `onlogin` for every tab which has that website loaded, not just the single tab that requested the assertion. As soon as the second tab's `onlogin` handler is called, it attempts to POST the assertion to the server using the old CSRF token - and the server raises a CSRF error.
+Under normal circumstances this would not usually matter: as soon tab B reloads the page, or the user navigates to a new page, then the embedded CSRF token is updated. But when Persona has generated an assertion in response to a call to `navigator.id.request()`, Persona calls `onlogin` for every tab which has that website loaded, not just the single tab that requested the assertion. As soon as tab B's `onlogin` handler is called, it attempts to POST the assertion to the server using the old CSRF token - and the server raises a CSRF error.
 
 ## The solution ##
 
