@@ -1,4 +1,4 @@
-The interaction between Persona and the mechanisms used to protect against CSRF (Cross-Site Request Forgery) login attacks can be a source of problems.
+If you implement a particular type of protection against CSRF (Cross-Site Request Forgery) login attacks, you will experience a problem when users have multiple pages open on your site, and then try to log in using one of them. This document explains the problem and how to resolve it.
 
 ## CSRF and CSRF login attacks ##
 
