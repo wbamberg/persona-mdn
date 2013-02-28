@@ -20,5 +20,4 @@ Under normal circumstances this would not usually matter: as soon tab B reloads 
 
 ## The solution ##
 
-The solution is for the `onlogin` handler to send a GET request, to fetch a fresh CSRF token and to
-see if the user is already signed in. If so, the handler just has to reload the page. Otherwise it uses the new CSRF token to POST the assertion to the server.
+The solution is for the `onlogin` handler to send a GET request which fetches a fresh CSRF token and checks whether the user is already logged in. If the user is already logged in, then the handler just has to reload the page. Otherwise it uses the new CSRF token to POST the assertion to the server.
